@@ -63,6 +63,7 @@ fun Menu(
 
     val itemList = listOf(
         Furniture("armchair", R.drawable.armchair),
+        Furniture("chair", R.drawable.chair),
         Furniture("sofa", R.drawable.sofa),
         Furniture("table", R.drawable.table),
         Furniture("tvstand", R.drawable.tvstand),
