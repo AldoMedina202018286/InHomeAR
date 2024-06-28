@@ -19,6 +19,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.google.ar.core.Config
+import io.github.sceneview.ar.ARScene
+import io.github.sceneview.ar.node.ArModelNode
+import io.github.sceneview.ar.node.ArNode
+import io.github.sceneview.ar.node.PlacementMode
 import pe.edu.upc.inhomear.ui.theme.InHomeARTheme
 
 class MainActivity : ComponentActivity() {
@@ -99,6 +104,52 @@ fun FurnitureCard(
             modifier = Modifier.size(140.dp),
             contentScale = ContentScale.FillBounds
         )
+    }
+}
+
+@Composable
+fun ARScreen() {
+    val nodes = remember {
+        mutableListOf<ArNode>()
+    }
+
+    val modelNode = remember {
+        mutableStateOf<ArModelNode?>(null)
+    }
+
+    val placeModelButton = remember {
+        mutableStateOf(false)
+    }
+
+    ARScene(
+        modifier = Modifier.fillMaxSize(),
+        nodes = nodes,
+        planeRenderer = true,
+        onCreate = { arSceneView ->
+            arSceneView.lightEstimationMode = Config.LightEstimationMode.DISABLED
+            arSceneView.planeRenderer.isShadowReceiver = false
+            modelNode.value = ArModelNode(arSceneView.engine, PlacementMode.INSTANT).apply {
+                loadModelGlbAsync(
+                    glbFileLocation = "models/chair.glb",
+                ) {
+
+                }
+                onAnchorChanged = {
+                    placeModelButton.value = !isAnchored
+                }
+                onHitResult = { node, hitResult ->
+                    placeModelButton.value = node.isTracking
+                }
+                nodes.add(modelNode.value!!)
+            }
+        }
+    )
+    if (placeModelButton.value) {
+        Button(onClick = {
+            modelNode.value?.anchor()
+        }) {
+            Text("Place Model")
+        }
     }
 }
 
