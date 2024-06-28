@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Box(modifier = Modifier.fillMaxSize()) {
                         val currentModel = remember {
-                            mutableStateOf("table")
+                            mutableStateOf("armchair")
                         }
                         ARScreen(currentModel.value)
                         Menu(modifier = Modifier.align(Alignment.BottomCenter)) {
@@ -62,10 +62,10 @@ fun Menu(
     }
 
     val itemList = listOf(
-        Furniture("table", R.drawable.table),
-        Furniture("chair", R.drawable.chair),
         Furniture("armchair", R.drawable.armchair),
-        Furniture("desk", R.drawable.desk),
+        Furniture("chair", R.drawable.sofa),
+        Furniture("table", R.drawable.table),
+        Furniture("desk", R.drawable.tvstand),
     )
 
     fun updateIndex(offset: Int) {
