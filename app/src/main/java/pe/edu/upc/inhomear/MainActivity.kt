@@ -63,9 +63,9 @@ fun Menu(
 
     val itemList = listOf(
         Furniture("armchair", R.drawable.armchair),
-        Furniture("chair", R.drawable.sofa),
+        Furniture("sofa", R.drawable.sofa),
         Furniture("table", R.drawable.table),
-        Furniture("desk", R.drawable.tvstand),
+        Furniture("tvstand", R.drawable.tvstand),
     )
 
     fun updateIndex(offset: Int) {
