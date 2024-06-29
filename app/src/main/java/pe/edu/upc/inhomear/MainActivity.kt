@@ -8,7 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -106,14 +106,15 @@ fun FurnitureCard(
 ) {
     Box(
         modifier = modifier
-            .size(140.dp)
-            .clip(CircleShape)
-            .border(width = 1.dp, Color.LightGray, CircleShape)
+            .padding(2.dp)
+            .size(100.dp)
+            .clip(RoundedCornerShape(8.dp))
+            .border(width = 1.dp, Color.LightGray, RoundedCornerShape(8.dp))
     ) {
         Image(
             painter = painterResource(id = imageId),
             contentDescription = "Furniture Image",
-            modifier = Modifier.size(140.dp),
+            modifier = Modifier.size(100.dp),
             contentScale = ContentScale.FillBounds
         )
     }
@@ -164,7 +165,8 @@ fun ARScreen(model: String) {
         if (placeModelButton.value) {
             Button(onClick = {
                 modelNode.value?.anchor()
-            }, modifier = Modifier.align(Alignment.BottomCenter)) {
+            }, modifier = Modifier.align(Alignment.TopCenter)
+                .padding(48.dp)) {
                 Text("Place Model")
             }
         }
